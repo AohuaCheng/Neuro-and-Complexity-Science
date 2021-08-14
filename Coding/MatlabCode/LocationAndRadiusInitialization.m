@@ -1,14 +1,14 @@
 function [LocationMatrix,RadiusVector,CellofInitialSP,CellofNeighbors,CellofRealRadius]=LocationAndRadiusInitialization(InitializationType,InitialPar,GrainedN)
 RadiusVector=InitialPar.RadiusIntervalofSoma(1) + (InitialPar.RadiusIntervalofSoma(2)-InitialPar.RadiusIntervalofSoma(1)).*rand(InitialPar.NumberofNeurons,1); % This is the vector to store the intial radius
 if InitializationType==1 %% This is the grid initialization
-   NeuronNinEachDim=(InitialPar.NumberofNeurons).^(1/3);
+   NeuronNinEachDim=(InitialPar.NumberofNeurons).^(1/3); % *dont understand this parameter* 
    Min=zeros(1,3); % This is a vector to store the minimum X,Y,Z coordinates
    Max=zeros(1,3); % This is a vector to store the maximum X,Y,Z coordinates
    Gap=zeros(1,3); % This is a vector to store the gap between two neighbor neurons in each dim
    for IDDim=1:3
        Min(IDDim)=0.1*InitialPar.SpaceLimit(IDDim);
        Max(IDDim)=0.9*InitialPar.SpaceLimit(IDDim);
-       Gap(IDDim)=0.8*InitialPar.SpaceLimit(IDDim)/NeuronNinEachDim;
+       Gap(IDDim)=0.8*InitialPar.SpaceLimit(IDDim)/NeuronNinEachDim; % *dont understand this dividing settings*
    end
    [PreX,PreY,PreZ]=meshgrid([Min(1):Gap(1):Max(1)],[Min(2):Gap(2):Max(2)],[Min(3):Gap(3):Max(3)]); % This is coordinate matrix. The raw number equals neuron number and the column number is 3
    LocationMatrix=[PreX(:),PreY(:),PreZ(:)];

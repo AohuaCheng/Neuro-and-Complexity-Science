@@ -56,7 +56,8 @@ for IDT=0:TimeDis:DurationLength
     frame = getframe(Fig); 
     Im = frame2im(frame); 
     [Imind,Cm] = rgb2ind(Im,256);
-    filename = 'D:\Files\InformationDynamics\Amadeus\ResultImage\Gif\Multi-1.gif';
+    filename = '.\ResultImage\Gif\Multi-1.gif';
+%     filename = 'D:\Files\InformationDynamics\Amadeus\ResultImage\Gif\Multi-1.gif';
     if IDT == 0       
         imwrite(Imind,Cm,filename,'gif','WriteMode','overwrite', 'Loopcount',inf);
     else 
