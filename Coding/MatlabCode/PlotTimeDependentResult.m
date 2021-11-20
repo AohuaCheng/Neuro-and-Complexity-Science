@@ -8,7 +8,7 @@ set(jFrame,'Maximized',1);
 pause(0.1);					
 warning('on','MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');	
 
-TimeDis=10;
+TimeDis=50;
 for IDT=0:TimeDis:DurationLength
     disp(IDT)
     hold on;
@@ -23,7 +23,7 @@ for IDT=0:TimeDis:DurationLength
                 GrowthTime=cell2mat(DevelopmentInfoCell{IDN,3}{Row,Col}(:,14)); %% This is the time step of the growth
                 NumCoor=NumCoor+1;
                 BaseNum=length(find(DevelopmentInfoCell{IDN,2}==1));
-                HistoryInfo=find((GrowthTime<=IDT)&(GrowthTime>IDT-4*TimeDis));
+                HistoryInfo=find((GrowthTime<=IDT)&(GrowthTime>IDT-1*TimeDis));
                 HistoryInfo = setdiff(HistoryInfo,1); 
                 if length(HistoryInfo)>1
                     for PreIDSeg=1:length(HistoryInfo)
@@ -41,9 +41,9 @@ for IDT=0:TimeDis:DurationLength
     end
     hold off;
     view(30,45);
-    xlim([0,4000])
-    ylim([0,4000])
-    zlim([0,4000])
+    xlim([0,6000])
+    ylim([0,6000])
+    zlim([0,6000])
     xlabel('\mum')
     ylabel('\mum')
     zlabel('\mum')
@@ -56,8 +56,7 @@ for IDT=0:TimeDis:DurationLength
     frame = getframe(Fig); 
     Im = frame2im(frame); 
     [Imind,Cm] = rgb2ind(Im,256);
-    filename = '.\ResultImage\Gif\Multi-1.gif';
-%     filename = 'D:\Files\InformationDynamics\Amadeus\ResultImage\Gif\Multi-1.gif';
+    filename = 'D:\Files\InformationDynamics\Amadeus\ResultImage\Gif\Multi-1.gif';
     if IDT == 0       
         imwrite(Imind,Cm,filename,'gif','WriteMode','overwrite', 'Loopcount',inf);
     else 

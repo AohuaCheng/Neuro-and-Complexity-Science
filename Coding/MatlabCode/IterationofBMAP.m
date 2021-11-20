@@ -33,5 +33,5 @@ if isempty(DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,12}) %% There is no next se
     DRL=(DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,2}^2)/(KG+(DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,2}^2));  %% Dephosphorylation rate limit
     Phosphorylation=PR*PRL*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}; %% This is the phosphorylation term
     Dephosphorylation=DR*DRL*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,6}; %% This is the dephosphorylation term
-    DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=Binding-Unbinding-Phosphorylation+Dephosphorylation-Decay; %% Update the tubulin concentration on synaptic segment
+    DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=Binding-Unbinding-Phosphorylation+Dephosphorylation-Decay; %% Update the BMAP concentration on synaptic segment
 end

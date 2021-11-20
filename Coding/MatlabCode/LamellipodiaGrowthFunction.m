@@ -10,7 +10,6 @@ for IDN=1:InitialPar.NumberofNeurons
         MaxCa=max(max(SubmembraneCell{IDN,5})); %% This is the maximum submembrane Ca concentration at this moment
         GrowingProb=MaxGrowingProb*((Beta/(Beta-Alpha))*(CoordinateCa/MaxCa)^Alpha-(Alpha/(Beta-Alpha))*(CoordinateCa/MaxCa)^Beta); %% The growth probability on this coordinate
         DevelopmentInfoCell{IDN,1}(Row,Col)=GrowingProb;
-        NonGrowingProb=(1-GrowingProb)*(1-GrowingProb>0); %% The probability of remaining stationary on this coordinate
         RandomizeBase=binornd(1,GrowingProb); %% 1 means growth, 0 means non-growth
         DevelopmentInfoCell{IDN,2}(Row,Col)=DevelopmentInfoCell{IDN,2}(Row,Col)+RandomizeBase>0; %% Randomize growth or non-growth
     end

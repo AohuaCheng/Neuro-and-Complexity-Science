@@ -20,7 +20,7 @@ InitialPar=InitializationParDefinition(InitializationType,NeuronTypepar,Duration
 [LocationMatrix,RadiusVector,CellofInitialSP,CellofNeighbors,CellofRealRadius]=LocationAndRadiusInitialization(InitializationType,InitialPar,GrainedN); % Here you will get an initialized space
 %% Initialization of Chemical Substances
 [SubmembraneCell]=ChemicalInitialization(GrainedN,InitialPar,CellofInitialSP); % Here you will get the chemical substances distributions
-NetrinFieldType=1;
+NetrinFieldType=2;
 [SourceLocationMatrix]=NetrinOneFieldInitialization(InitialPar,LocationMatrix,NetrinFieldType); 
 %% Initialization of Development Information
 [DevelopmentInfoCell]=DevelopInitialization(GrainedN,InitialPar); % Here you initialize the development information
@@ -33,10 +33,10 @@ SubmembraneCellAcrossTime{1,1}=SubmembraneCell;
 for IDT=2:DurationLength
     SubmembraneCell=SubmembraneCellAcrossTime{IDT-1,1};
     %% Stage 1 The Development of Lamellipodia
-    disp(['Lamellipodia formation and condensation-',num2str(IDT/DurationLength*100),'%'])
+    %disp(['Lamellipodia formation and condensation-',num2str(IDT/DurationLength*100),'%'])
     [DevelopmentInfoCell]=LamellipodiaGrowthFunction(SubmembraneCell,DevelopmentInfoCell,InitialPar,GrainedN); % Here you will update the Lamellipodia formation and condensation on the soma membrane
     %% Stage 2 Growth of Synapses
-    disp(['Interation of chemical and development information-',num2str(IDT/DurationLength*100),'%'])
+    %disp(['Interation of chemical and development information-',num2str(IDT/DurationLength*100),'%'])
     [SubmembraneCell,DevelopmentInfoCell]=IterationofChemicalSubstance(LocationMatrix,SubmembraneCell,DevelopmentInfoCell,CellofRealRadius,CellofNeighbors,SourceLocationMatrix,InitialPar,GrainedN,IDT); % Here you will update the chemical and development information
     SubmembraneCellAcrossTime{IDT,1}=SubmembraneCell;
 end
@@ -44,6 +44,6 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Visualization Part
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-PlotResult(CellofInitialSP,DevelopmentInfoCell,InitialPar,GrainedN)
+ PlotResult(CellofInitialSP,DevelopmentInfoCell,InitialPar,GrainedN,SourceLocationMatrix)
 
-PlotTimeDependentResult(CellofInitialSP,DevelopmentInfoCell,InitialPar,GrainedN,DurationLength)
+% PlotTimeDependentResult(CellofInitialSP,DevelopmentInfoCell,InitialPar,GrainedN,DurationLength)

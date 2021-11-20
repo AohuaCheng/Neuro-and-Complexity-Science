@@ -2,8 +2,8 @@ function [SourceLocationMatrix]=NetrinOneFieldInitialization(InitialPar,Location
 if NetrinFieldType==1 %% The Netrin Field is homogeneous everywhere
     SourceLocationMatrix=[]; %% There is no source
 elseif NetrinFieldType==2 %% The Netrin Field is non-homogeneous
-    NumofNetrinSource=100; %% Number of netrin source
-    MiniDistanceBN=150; %% This is the minimum distance between any source and neurons
+    NumofNetrinSource=30; %% Number of netrin source
+    MiniDistanceBN=100; %% This is the minimum distance between any source and neurons
     Min=zeros(1,3); % This is a vector to store the minimum X,Y,Z coordinates
     Max=zeros(1,3); % This is a vector to store the maximum X,Y,Z coordinates
     for IDDim=1:3

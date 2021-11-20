@@ -32,16 +32,16 @@ if IDSeg==1 %% This is the root segment
         Decay=UDecay*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}; %% This is the decay term
         Binding=BindingR*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}; %% This is the binding term
         Unbinding=UnBindingR*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,5}; %% This is the un-binding term
-        DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=LaplaceS2-Decay-Binding+Unbinding; %% Update the tubulin concentration on synaptic segment
+        DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=LaplaceS2-Decay-Binding+Unbinding; %% Update the UMAP concentration on synaptic segment
     else %% There is next segment (or segments)
         NextSegments=DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,12};
         TNextSegment=zeros(1,length(NextSegments));
         for NS=1:length(NextSegments)
             TNextSegment(NS)=DevelopmentInfoCell{IDN,3}{Row,Col}{NextSegments(NS),IDonS};
         end
-        LaplaceS3=(SubmembraneCell{IDN,IDonM}(Row,Col)+DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}+sum(TNextSegment))/(2+length(TNextSegment)); %% Update the tubulin concentration on synaptic segment
+        LaplaceS3=(SubmembraneCell{IDN,IDonM}(Row,Col)+DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}+sum(TNextSegment))/(2+length(TNextSegment)); %% Update the UMAP concentration on synaptic segment
         Decay=UDecay*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}; %% This is the decay term
-        DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=LaplaceS3-Decay; %% Update the tubulin concentration on synaptic segment
+        DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=LaplaceS3-Decay; %% Update the UMAP concentration on synaptic segment
     end
 elseif IDSeg>1 %% This is not the root segment
     if isempty(DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,12}) %% There is no next segment
@@ -66,9 +66,9 @@ elseif IDSeg>1 %% This is not the root segment
         for NS=1:length(NextSegments)
             TNextSegment(NS)=DevelopmentInfoCell{IDN,3}{Row,Col}{NextSegments(NS),IDonS};
         end
-        LaplaceS3=(sum(TNearSegment)+DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}+sum(TNextSegment))/(1+length(TNearSegment)+length(TNextSegment)); %% Update the tubulin concentration on synaptic segment
+        LaplaceS3=(sum(TNearSegment)+DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}+sum(TNextSegment))/(1+length(TNearSegment)+length(TNextSegment)); %% Update the UMAP concentration on synaptic segment
         Decay=UDecay*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}; %% This is the decay term
-        DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=LaplaceS3-Decay; %% Update the tubulin concentration on synaptic segment
+        DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDonS}=LaplaceS3-Decay; %% Update the UMAP concentration on synaptic segment
     end
 end
         

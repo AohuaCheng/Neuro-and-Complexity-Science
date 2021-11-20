@@ -40,6 +40,9 @@ if isempty(DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,12}) %% There is no next se
         Normal=DevelopmentInfoCell{IDN,4}{Row,Col}(IDT-1,4); %% Normalization base of centrifugal order
         CTerm=1/NumofTS*Normal; %% Normalization term of centrifugal order
         BranchingProb=BranchingR*BaseBranchingProb*NumofTS^(-E)*2^(-S*DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,13})/CTerm; %% This is the branching probability
+        
+        disp(DevelopmentInfoCell{IDN,4}{Row,Col}(IDT-1,3))
+        disp(1/NumofTS)
         if ~isnan(BranchingProb)
             DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,8}=BranchingProb;
         end
@@ -126,7 +129,7 @@ if isempty(DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,12}) %% There is no next se
                 NVector=Rotation3D(BaseVector,DisturbanceAI(1)+(DisturbanceAI(2)-DisturbanceAI(1))*rand(1,3),CurrentC); %% Next segment
                 NDirection=(NVector-CurrentC)/norm(NVector-CurrentC); %% Normalization
                 [NVector,NDirection]=SynapseGuidancebyNetrinOne(CurrentC,NDirection,EnL,SourceLocationMatrix,IDT); %% Axon guidance
-                NSegment=cell(1,13); %% This is the cell to save the information of the left branching daughter segment
+                NSegment=cell(1,14); %% This is the cell to save the information of the left branching daughter segment
                 for IDL=2:6
                     NSegment{1,IDL}=DevelopmentInfoCell{IDN,3}{Row,Col}{IDSeg,IDL}*InheritanceR; %% Initialization of chemical substance
                 end
